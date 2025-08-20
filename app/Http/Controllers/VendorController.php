@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -11,13 +12,25 @@ class VendorController extends Controller
     }
      public function register(Request $request){
         $request->validate([
+            "id_number"=>"required",
             "full_name" => "required",
             "phone" => "required|regex:/^[0-9]{10}/|unique:vendors,phone",
             "email" => "required|email|unique:vendors,email",
             "password" => "required",
             "address" => "required"
 ]);
-    }
+
+Vendor::create([
+    'full_name' => $request->full_name,
+    'phone'     => $request->phone,
+    'email'     => $request->email,
+    'password'  => bcrypt($request->password),
+    'address'   => $request->address,
+    'id_number' => $request->id_number, // <-- add this only if id_number is required
+]);
+
+return redirect('vendor/signup')->with('msg', 'Registered Successfully');
+     }
 
 
 
