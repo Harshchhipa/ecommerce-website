@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\VendorMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,9 +56,14 @@ Route::post('vendor/signup',[VendorController::class,'register']);
 
 Route::get('vendor/login',[VendorController::class,'login']);
 
+Route::post('vendor/login',[VendorController::class,'login_create']);
+
+Route::get('vendor/logout',[VendorController::class,'logout']);
+
+
 Route::get('vendor/forget',[VendorController::class,'forget']);
 
-Route::get('vendor/',[VendorController::class,'index']);
+Route::get('vendor/',[VendorController::class,'index'])->middleware(VendorMiddleware::class);
 
 Route::get('vendor/add-product',[VendorController::class,'addproduct']);
 

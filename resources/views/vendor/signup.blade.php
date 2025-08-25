@@ -1,4 +1,5 @@
 @extends('vendor.layouts.main')
+
 @push('title')
 <title>Vendor Register</title>
 @endpush
@@ -11,20 +12,32 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div>
-                            <img src="{{asset('dashboard/assets/img/vendor.jpg')}}" class="rounded-3 img-fluid">
+                            <img src="{{ asset('dashboard/assets/img/vendor.jpg') }}" class="rounded-3 img-fluid">
                         </div>
                     </div>
 
                     <div class="col-lg-6">
-                        @session('msg')
-                        <div class="alert alert-success">{{ session('msg') }}</div>
-                        @endsession 
+                        {{-- ✅ Success Message --}}
+                        @if(session('msg'))
+                            <div class="alert alert-success">
+                                {{ session('msg') }}
+                            </div>
+                        @endif
+
                         <div>
                             {{-- ✅ Signup Form --}}
                             <form action="{{ url('vendor/signup') }}" method="POST">
                                 @csrf
 
                                 <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <label class="form-label">ID Number</label>
+                                        <input type="text" class="form-control" name="id_number" value="{{ old('id_number') }}">
+                                        @error("id_number")
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <div class="col-lg-12 mb-3">
                                         <label class="form-label">Full Name</label>
                                         <input type="text" class="form-control" name="full_name" placeholder="John Doe" value="{{ old('full_name') }}">

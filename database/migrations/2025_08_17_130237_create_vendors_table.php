@@ -12,24 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vendors', function (Blueprint $table) {
-            public function up()
-{
-    Schema::table('vendors', function (Blueprint $table) {
-        $table->string('id_number')->nullable()->change();
-        $table->string('full_name')->nullable()->change();
-        $table->string('phone')->nullable()->change();
-        $table->string('email')->nullable()->change();
-        $table->string('password')->nullable()->change();
-        $table->text('address')->nullable()->change();
-        $table->string('business_name')->nullable()->change();
-        $table->string('business_type')->nullable()->change();
-        $table->string('gst_number')->nullable()->change();
-        $table->string('business_category')->nullable()->change();
-        $table->string('bank_account_no')->nullable()->change();
-        $table->string('payment_method')->nullable()->change();
-        $table->string('image')->nullable()->change();
-        $table->string('status')->default('unverified');
-        $table->timestamps();
+            $table->id();
+            $table->string('id_number')->nullable();
+            $table->string('full_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
+            $table->text('address')->nullable();
+            $table->string('business_name')->nullable();
+            $table->string('business_type')->nullable();
+            $table->string('gst_number')->nullable();
+            $table->string('business_category')->nullable();
+            $table->string('bank_account_no')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->string('image')->nullable();
+            $table->string('status')->default('unverified');
+            $table->timestamps();
         });
     }
 
